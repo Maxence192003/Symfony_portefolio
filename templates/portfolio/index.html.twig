@@ -1,0 +1,315 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ nom }} - Portfolio BTS SIO{% endblock %}
+
+{% block body %}
+
+<!-- Navigation Principale -->
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <div class="navbar-content">
+            <div class="logo">{{ nom|split(' ')|first }}</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Section Hero -->
+<section class="hero" id="accueil">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">{{ nom }}</h1>
+            <p class="hero-subtitle">{{ titre }}</p>
+            <div class="hero-description">
+                <p>Passionné par le développement informatique et les technologies modernes</p>
+            </div>
+            <div class="social-links">
+                <a href="mailto:{{ email }}" class="btn btn-primary">Envoyer un email</a>
+                <a href="{{ github }}" target="_blank" class="btn btn-secondary">Voir GitHub</a>
+                <a href="{{ linkedin }}" target="_blank" class="btn btn-secondary">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistiques -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            {% for stat in stats %}
+            <div class="stat-card">
+                <div class="stat-number">{{ stat.numero }}</div>
+                <div class="stat-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Section Profil -->
+<section class="section" id="profil">
+    <div class="container">
+        <h2 class="section-title">Profil</h2>
+        
+        <div class="profile-content">
+            <p class="profile-text">{{ description }}</p>
+            <p class="profile-text">{{ objectif }}</p>
+        </div>
+
+        {% if parcoursScolaire or parcoursProfessionnel %}
+        {% endif %}
+    </div>
+</section>
+
+<!-- Section Parcours -->
+<section class="section" id="parcours">
+    <div class="container">
+        <h2 class="section-title">Parcours</h2>
+
+        <div class="parcours-container">
+            {% if parcoursScolaire %}
+            <div class="parcours-column">
+                <h3 class="category-title">Parcours Scolaire</h3>
+                <div class="timeline">
+                    {% for item in parcoursScolaire %}
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-period">{{ item.periode }}</div>
+                            <h4 class="timeline-title">{{ item.titre }}</h4>
+                            <p class="timeline-location">{{ item.lieu }}</p>
+                            <p class="timeline-description">{{ item.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if parcoursProfessionnel %}
+            <div class="parcours-column">
+                <h3 class="category-title">Parcours Professionnel</h3>
+                <div class="timeline">
+                    {% for item in parcoursProfessionnel %}
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-period">{{ item.periode }}</div>
+                            <h4 class="timeline-title">{{ item.titre }}</h4>
+                            <p class="timeline-location">{{ item.entreprise }}</p>
+                            <p class="timeline-description">{{ item.description }}</p>
+                            {% if item.rapport %}
+                            <a href="{{ item.rapport }}" download class="btn btn-download" style="margin-top: 10px; display: inline-block;">📥 Rapport de stage</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Section Compétences -->
+<section class="section" id="competences">
+    <div class="container">
+        <h2 class="section-title">Compétences</h2>
+        
+        <div class="competences-grid">
+            {% for categorie in competences %}
+            <div class="competence-card">
+                <div class="competence-header">
+                    <span class="competence-icone">{{ categorie.icone }}</span>
+                    <h3>{{ categorie.titre }}</h3>
+                </div>
+                <div class="competence-skills">
+                    {% for skill in categorie.skills %}
+                    <span class="skill-tag">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Section Certifications -->
+{% if certifications %}
+<section class="section" id="certifications">
+    <div class="container">
+        <h2 class="section-title">Certifications</h2>
+        
+        <div class="certifications-grid">
+            {% for cert in certifications %}
+            <div class="certification-card">
+                <div class="certification-header">
+                    {% if cert.logo %}
+                    <img src="{{ cert.logo }}" alt="{{ cert.nom }}" class="certification-logo">
+                    {% else %}
+                    <div class="certification-placeholder">📜</div>
+                    {% endif %}
+                </div>
+                <div class="certification-content">
+                    <h3>{{ cert.nom }}</h3>
+                    <p class="certification-organisme">{{ cert.organisme }}</p>
+                    <p class="certification-date">{{ cert.date }}</p>
+                    {% if cert.description %}
+                    <p class="certification-description">{{ cert.description }}</p>
+                    {% endif %}
+                </div>
+                {% if cert.pdf %}
+                <a href="{{ cert.pdf }}" download class="btn btn-download">📥 Télécharger</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Section Projets -->
+<section class="section" id="projets">
+    <div class="container">
+        <h2 class="section-title">Projets</h2>
+
+        {% if projetsScolaires %}
+        <div class="projets-category">
+            <h3 class="category-title">Projets Scolaires</h3>
+            <p class="category-description">Travaux réalisés durant ma formation</p>
+            <div class="projects-grid">
+                {% for project in projetsScolaires %}
+                <div class="project-card">
+                    {% if project.image %}
+                    <div class="project-image">
+                        <img src="{{ project.image }}" alt="{{ project.titre }}">
+                    </div>
+                    {% else %}
+                    <div class="project-placeholder">📁</div>
+                    {% endif %}
+                    <div class="project-content">
+                        <h4>{{ project.titre }}</h4>
+                        <p>{{ project.description }}</p>
+                        <div class="project-tech">
+                            {% for tech in project.tech %}
+                            <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if projetsPersonnels %}
+        <div class="projets-category">
+            <h3 class="category-title">Projets Personnels</h3>
+            <p class="category-description">Mes réalisations personnelles</p>
+            <div class="projects-grid">
+                {% for project in projetsPersonnels %}
+                <div class="project-card">
+                    {% if project.image %}
+                    <div class="project-image">
+                        <img src="{{ project.image }}" alt="{{ project.titre }}">
+                    </div>
+                    {% else %}
+                    <div class="project-placeholder">📁</div>
+                    {% endif %}
+                    <div class="project-content">
+                        <h4>{{ project.titre }}</h4>
+                        <p>{{ project.description }}</p>
+                        <div class="project-tech">
+                            {% for tech in project.tech %}
+                            <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        {% if project.lien %}
+                        <a href="{{ project.lien }}" target="_blank" class="project-link">Voir le projet →</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if projetsProfessionnels %}
+        <div class="projets-category">
+            <h3 class="category-title">Projets de Stage</h3>
+            <p class="category-description">Projets réalisés en stage</p>
+            <div class="projects-grid">
+                {% for project in projetsProfessionnels %}
+                <div class="project-card">
+                    {% if project.image %}
+                    <div class="project-image">
+                        <img src="{{ project.image }}" alt="{{ project.titre }}">
+                    </div>
+                    {% else %}
+                    <div class="project-placeholder">📁</div>
+                    {% endif %}
+                    <div class="project-content">
+                        <h4>{{ project.titre }}</h4>
+                        <p>{{ project.description }}</p>
+                        <div class="project-tech">
+                            {% for tech in project.tech %}
+                            <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        {% if project.lien %}
+                        <a href="{{ project.lien }}" download class="project-link">📥 Voir le rapport →</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+
+<!-- Section Contact -->
+<section class="section" id="contact">
+    <div class="container">
+        <h2 class="section-title">Contact</h2>
+        
+        <div class="contact-content">
+            <div class="contact-links">
+                <a href="mailto:{{ email }}" class="contact-link">
+                    <div class="contact-link-label">Email</div>
+                    <div class="contact-link-value">{{ email }}</div>
+                </a>
+                <a href="{{ github }}" target="_blank" class="contact-link">
+                    <div class="contact-link-label">GitHub</div>
+                    <div class="contact-link-value">Voir le profil</div>
+                </a>
+                <a href="{{ linkedin }}" target="_blank" class="contact-link">
+                    <div class="contact-link-label">LinkedIn</div>
+                    <div class="contact-link-value">Voir le profil</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <p>© Copyright 2026 - {{ nom }}</p>
+            <p>Tous droits réservés</p>
+        </div>
+    </div>
+</footer>
+
+{% endblock %}
