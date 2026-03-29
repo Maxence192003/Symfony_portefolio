@@ -10,3 +10,8 @@ framework:
             low: ['email']
         admin_recipients:
             - { email: admin@example.com }
+
+when@prod:
+    framework:
+        notifier: ~
+

@@ -70,7 +70,7 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
-# Force rebuild: 2025-03-29-disable-asset-mapper
+# Force rebuild: 2025-03-29-disable-optional-features
 FROM frankenphp_base AS frankenphp_prod_builder
 
 ENV APP_ENV=prod
