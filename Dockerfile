@@ -139,6 +139,7 @@ COPY --from=frankenphp_prod_builder /usr/bin/file /usr/bin/file
 COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.mgc
 
 ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
+ENV SERVER_NAME=0.0.0.0:3000
 
 RUN <<-EOF
 	mkdir -p /data/caddy /config/caddy
