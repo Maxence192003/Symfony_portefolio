@@ -70,7 +70,7 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
-# Force rebuild: 2025-03-30-server-name-port
+# Force rebuild: 2025-03-30-user-root-permissions
 FROM frankenphp_base AS frankenphp_prod_builder
 
 ENV APP_ENV=prod
@@ -154,7 +154,7 @@ COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-en
 
 VOLUME /app/var/
 
-USER www-data
+USER root
 
 WORKDIR /app
 
