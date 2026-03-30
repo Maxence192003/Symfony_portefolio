@@ -70,7 +70,7 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
-# Force rebuild: 2025-03-30-use-start-server-script
+# Force rebuild: 2025-03-30-fix-router-and-healthcheck
 FROM frankenphp_base AS frankenphp_prod_builder
 
 ENV APP_ENV=prod
@@ -159,5 +159,5 @@ USER root
 
 WORKDIR /app
 
-HEALTHCHECK --start-period=60s CMD php -r 'exit(false === @file_get_contents("http://127.0.0.1:" . (getenv("PORT") ?: 10000), context: stream_context_create(["http" => ["timeout" => 5]])) ? 1 : 0);'
+HEALTHCHECK --start-period=60s CMD php -r 'exit(file_exists("/app/public/index.php") ? 0 : 1);'
 CMD ["start-server"]
