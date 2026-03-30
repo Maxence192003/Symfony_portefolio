@@ -70,7 +70,7 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
-# Force rebuild: 2025-03-30-add-proper-entrypoint
+# Force rebuild: 2025-03-30-assets-now-in-git
 FROM frankenphp_base AS frankenphp_prod_builder
 
 ENV APP_ENV=prod
@@ -85,6 +85,9 @@ RUN composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scri
 
 # copy sources
 COPY --link --exclude=frankenphp/ . ./
+
+# Explicitly copy public/assets to ensure they're not ignored
+COPY --link public/assets public/assets
 
 RUN <<-EOF
 	mkdir -p var/cache var/log var/share
