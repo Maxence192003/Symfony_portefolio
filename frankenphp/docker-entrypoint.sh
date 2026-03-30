@@ -1,14 +1,26 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
+# For PHP built-in server, just start it directly
+if [ "$1" = 'sh' ]; then
+	if [ -z "$(ls -A 'vendor/' 2>/dev/null)" ]; then
+		composer install --prefer-dist --no-progress --no-interaction
+	fi
+
+	php bin/console -V
+	echo 'PHP app ready!'
+	
+	# Execute the PHP server command directly
+	exec "$@"
+fi
+
+# For other commands (console, etc.)
+if [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 
 	if [ -z "$(ls -A 'vendor/' 2>/dev/null)" ]; then
 		composer install --prefer-dist --no-progress --no-interaction
 	fi
 
-	# Display information about the current project
-	# Or about an error in project initialization
 	php bin/console -V
 
 	if grep -q ^DATABASE_URL= .env; then
@@ -16,13 +28,12 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		ATTEMPTS_LEFT_TO_REACH_DATABASE=60
 		until [ $ATTEMPTS_LEFT_TO_REACH_DATABASE -eq 0 ] || DATABASE_ERROR=$(php bin/console dbal:run-sql -q "SELECT 1" 2>&1); do
 			if [ $? -eq 255 ]; then
-				# If the Doctrine command exits with 255, an unrecoverable error occurred
 				ATTEMPTS_LEFT_TO_REACH_DATABASE=0
 				break
 			fi
 			sleep 1
 			ATTEMPTS_LEFT_TO_REACH_DATABASE=$((ATTEMPTS_LEFT_TO_REACH_DATABASE - 1))
-			echo "Still waiting for database to be ready... Or maybe the database is not reachable. $ATTEMPTS_LEFT_TO_REACH_DATABASE attempts left."
+			echo "Still waiting for database to be ready... $ATTEMPTS_LEFT_TO_REACH_DATABASE attempts left."
 		done
 
 		if [ $ATTEMPTS_LEFT_TO_REACH_DATABASE -eq 0 ]; then

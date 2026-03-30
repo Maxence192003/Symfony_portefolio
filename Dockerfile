@@ -70,7 +70,7 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
-# Force rebuild: 2025-03-30-use-render-port-env
+# Force rebuild: 2025-03-30-use-start-server-script
 FROM frankenphp_base AS frankenphp_prod_builder
 
 ENV APP_ENV=prod
@@ -151,6 +151,7 @@ EOF
 COPY --from=frankenphp_prod_builder --chown=www-data:www-data /app /app
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY --link --chmod=755 frankenphp/start-server.sh /usr/local/bin/start-server
 
 VOLUME /app/var/
 
@@ -158,7 +159,5 @@ USER root
 
 WORKDIR /app
 
-ENTRYPOINT ["docker-entrypoint"]
-
-HEALTHCHECK --start-period=60s CMD php -r 'exit(false === @file_get_contents("http://localhost:3000/", context: stream_context_create(["http" => ["timeout" => 5]])) ? 1 : 0);'
-CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-3000} -t public -r router.php"]
+HEALTHCHECK --start-period=60s CMD php -r 'exit(false === @file_get_contents("http://127.0.0.1:" . (getenv("PORT") ?: 10000), context: stream_context_create(["http" => ["timeout" => 5]])) ? 1 : 0);'
+CMD ["start-server"]
