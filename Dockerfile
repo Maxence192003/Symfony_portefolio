@@ -70,7 +70,7 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
-# Force rebuild: 2025-03-30-add-detailed-logging
+# Force rebuild: 2025-03-30-add-proper-entrypoint
 FROM frankenphp_base AS frankenphp_prod_builder
 
 ENV APP_ENV=prod
@@ -159,5 +159,6 @@ USER root
 
 WORKDIR /app
 
+ENTRYPOINT ["/usr/local/bin/start-server"]
+
 HEALTHCHECK --start-period=60s CMD php -r 'exit(file_exists("/app/public/index.php") ? 0 : 1);'
-CMD ["start-server"]
