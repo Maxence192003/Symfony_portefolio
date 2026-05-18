@@ -20,7 +20,7 @@ final class PortfolioController extends AbstractController
 
             // Statistiques
             'stats' => [
-                ['numero' => 2, 'label' => 'Projets en cours'],
+                ['numero' => 1, 'label' => 'Projets en cours'],
                 ['numero' => 3, 'label' => 'Projets réalisés'],
                 ['numero' => 3, 'label' => 'Certifications'],
                 ['numero' => '10+', 'label' => 'Technologies'],
