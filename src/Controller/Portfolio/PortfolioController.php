@@ -53,13 +53,13 @@ final class PortfolioController extends AbstractController
                 [
                     'periode' => 'sept 2023 - juin 2024',
                     'titre' => '1ère année BTS SIO - Option SLAM',
-                    'lieu' => 'Campus Beaupeyrat, Redon',
+                    'lieu' => 'Campus Beaupeyrat, Limoges',
                     'description' => 'Services Informatiques aux Organisations',
                 ],
                 [
                     'periode' => 'sept 2024 - Aujourd\'hui',
                     'titre' => '2eme année BTS SIO - Option SLAM',
-                    'lieu' => 'Campus Beaupeyrat, Redon',
+                    'lieu' => 'Campus Beaupeyrat, Limoges',
                     'description' => '2ème année - Formation en cours',
                 ],
             ],
@@ -69,7 +69,7 @@ final class PortfolioController extends AbstractController
                 [
                     'periode' => 'aout 2022 - dec 2024',
                     'titre' => 'Job Étudiant',
-                    'entreprise' => 'Carrefour - Grand Surface',
+                    'entreprise' => 'Carrefour - Grand Surface - Brive',
                     'description' => 'Vendeur / Employé en magasin',
                     'rapport' => null,
                 ],

@@ -67,6 +67,10 @@ EOF
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
+# Install composer dependencies (skip scripts to avoid config issues during build)
+COPY --link composer.json composer.lock* ./
+RUN composer install --no-scripts
+
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
