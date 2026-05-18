@@ -43,22 +43,39 @@ body {
 
 .navbar .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
 }
 
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+}
+
 .logo {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--primary);
-    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo img {
+    display: block;
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
     gap: 2.5rem;
+    flex-wrap: wrap;
+    row-gap: 0.75rem;
+    margin-left: auto;
+    justify-content: flex-end;
 }
 
 .nav-links a {
@@ -586,6 +603,15 @@ body {
     object-fit: cover;
 }
 
+.project-image-compact {
+    height: 120px;
+    padding: 0.75rem;
+}
+
+.project-image-compact img {
+    object-fit: contain;
+}
+
 .project-content {
     padding: 1.2rem;
     flex: 1;
@@ -732,6 +758,15 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .navbar .container {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .logo img {
+        width: 72px;
+        height: 72px;
+    }
+
     .nav-links {
         display: none;
     }
@@ -904,6 +939,251 @@ html {
 .btn-download:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 245, 255, 0.4);
+}
+
+/* Veille technologique */
+.veille-section {
+    background:
+        radial-gradient(circle at top right, rgba(255, 0, 110, 0.12), transparent 28%),
+        radial-gradient(circle at top left, rgba(0, 245, 255, 0.12), transparent 30%),
+        var(--bg);
+}
+
+.veille-hero-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.07), rgba(255, 0, 110, 0.05));
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.veille-kicker {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+}
+
+.veille-hero-card h3,
+.veille-card h3,
+.veille-focus-card h3 {
+    color: var(--text);
+    font-size: 1.5rem;
+}
+
+.veille-intro,
+.veille-card-text,
+.veille-example p,
+.veille-source-item p,
+.veille-conclusion-card p {
+    color: var(--text-light);
+}
+
+.veille-objectifs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.veille-objectif-card {
+    border-left: 3px solid var(--accent);
+    background: rgba(255, 102, 0, 0.08);
+    padding: 1rem 1.2rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.veille-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.veille-card,
+.veille-focus-card {
+    border: 1px solid var(--border);
+    background: rgba(5, 5, 8, 0.7);
+    padding: 1.6rem;
+    backdrop-filter: blur(6px);
+}
+
+.veille-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    height: 100%;
+}
+
+.veille-card-header {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    align-items: start;
+    gap: 1rem;
+}
+
+.veille-card-header h3 {
+    min-height: 3.4rem;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.veille-card-text {
+    min-height: 6.5rem;
+}
+
+.veille-card-number {
+    min-width: 52px;
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.veille-points {
+    padding-left: 1.2rem;
+    color: var(--text-light);
+    display: grid;
+    gap: 0.65rem;
+    min-height: 8.5rem;
+    align-content: start;
+}
+
+.veille-points li::marker {
+    color: var(--primary);
+}
+
+.veille-example,
+.veille-sources,
+.single-source {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+}
+
+.veille-example {
+    min-height: 8rem;
+}
+
+.veille-example h4,
+.veille-sources h4 {
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+}
+
+.veille-source-item + .veille-source-item {
+    margin-top: 1rem;
+}
+
+.veille-source-item h5 {
+    color: var(--primary);
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+    min-height: 2.8rem;
+}
+
+.veille-source-item a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.veille-source-item a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.veille-source-details {
+    margin-top: 0.5rem;
+}
+
+.veille-source-details summary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    list-style: none;
+    transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+
+.veille-source-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.veille-source-details summary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(255, 102, 0, 0.08);
+}
+
+.veille-source-details .toggle-closed {
+    display: none;
+}
+
+.veille-source-details[open] .toggle-open {
+    display: inline;
+}
+
+.veille-source-details[open] .toggle-closed {
+    display: none;
+}
+
+.veille-source-details:not([open]) .toggle-open {
+    display: none;
+}
+
+.veille-source-details:not([open]) .toggle-closed {
+    display: inline;
+}
+
+.veille-source-details p {
+    margin-top: 0.75rem;
+}
+
+.veille-bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.veille-risks-card {
+    border-color: rgba(255, 0, 110, 0.35);
+}
+
+.veille-conclusion-card {
+    border-color: rgba(0, 245, 255, 0.35);
+}
+
+@media (max-width: 900px) {
+    .veille-hero-card,
+    .veille-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .veille-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ==================== End of Cyberpunk Portfolio CSS ==================== */

@@ -8,7 +8,9 @@
 <nav class="navbar" id="navbar">
     <div class="container">
         <div class="navbar-content">
-            <div class="logo">{{ nom|split(' ')|first }}</div>
+            <a href="#accueil" class="logo" aria-label="Retour à l'accueil">
+                <img src="/images/logo.png" alt="Logo du portfolio">
+            </a>
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#profil">Profil</a></li>
@@ -16,6 +18,7 @@
                 <li><a href="#competences">Compétences</a></li>
                 <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#projets">Projets</a></li>
+                <li><a href="#veille">Veille</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -250,7 +253,7 @@
                 {% for project in projetsProfessionnels %}
                 <div class="project-card">
                     {% if project.image %}
-                    <div class="project-image">
+                    <div class="project-image{% if project.imageClass is defined and project.imageClass %} {{ project.imageClass }}{% endif %}">
                         <img src="{{ project.image }}" alt="{{ project.titre }}">
                     </div>
                     {% else %}
@@ -275,6 +278,108 @@
         {% endif %}
     </div>
 </section>
+
+{% if veilleTechnologique %}
+<section class="section veille-section" id="veille">
+    <div class="container">
+        <h2 class="section-title">Veille technologique</h2>
+
+        <div class="veille-hero-card">
+            <div>
+                <p class="veille-kicker">Sujet d'étude</p>
+                <h3>{{ veilleTechnologique.titre }}</h3>
+            </div>
+            <p class="veille-intro">{{ veilleTechnologique.introduction }}</p>
+        </div>
+
+        {% if veilleTechnologique.objectifs %}
+        <div class="veille-objectifs">
+            {% for objectif in veilleTechnologique.objectifs %}
+            <div class="veille-objectif-card">{{ objectif }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if veilleTechnologique.secteurs %}
+        <div class="veille-grid">
+            {% for secteur in veilleTechnologique.secteurs %}
+            <article class="veille-card">
+                <div class="veille-card-header">
+                    <span class="veille-card-number">{{ secteur.numero }}</span>
+                    <h3>{{ secteur.titre }}</h3>
+                </div>
+
+                <p class="veille-card-text">{{ secteur.resume }}</p>
+
+                {% if secteur.points %}
+                <ul class="veille-points">
+                    {% for point in secteur.points %}
+                    <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <div class="veille-example">
+                    <h4>{{ secteur.exempleTitre }}</h4>
+                    <p>{{ secteur.exempleTexte }}</p>
+                </div>
+
+                {% if secteur.articles %}
+                <div class="veille-sources">
+                    <h4>Articles de référence</h4>
+                    {% for article in secteur.articles %}
+                    <div class="veille-source-item">
+                        {% if article.url is defined and article.url %}
+                        <h5><a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">{{ article.titre }}</a></h5>
+                        {% else %}
+                        <h5>{{ article.titre }}</h5>
+                        {% endif %}
+                        <details class="veille-source-details">
+                            <summary>
+                                <span class="toggle-open">Masquer le texte</span>
+                                <span class="toggle-closed">Afficher le texte</span>
+                            </summary>
+                            <p>{{ article.description }}</p>
+                        </details>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="veille-bottom-grid">
+            {% if veilleTechnologique.risques %}
+            <article class="veille-focus-card veille-risks-card">
+                <h3>Limites et risques de l'IA</h3>
+                <ul class="veille-points">
+                    {% for risque in veilleTechnologique.risques %}
+                    <li>{{ risque }}</li>
+                    {% endfor %}
+                </ul>
+                {% if veilleTechnologique.articleRisque %}
+                <div class="veille-source-item single-source">
+                    {% if veilleTechnologique.articleRisque.url is defined and veilleTechnologique.articleRisque.url %}
+                    <h5><a href="{{ veilleTechnologique.articleRisque.url }}" target="_blank" rel="noopener noreferrer">{{ veilleTechnologique.articleRisque.titre }}</a></h5>
+                    {% else %}
+                    <h5>{{ veilleTechnologique.articleRisque.titre }}</h5>
+                    {% endif %}
+                    <p>{{ veilleTechnologique.articleRisque.description }}</p>
+                </div>
+                {% endif %}
+            </article>
+            {% endif %}
+
+            <article class="veille-focus-card veille-conclusion-card">
+                <h3>Conclusion</h3>
+                <p>{{ veilleTechnologique.conclusion }}</p>
+            </article>
+        </div>
+    </div>
+</section>
+{% endif %}
 
 
 <!-- Section Contact -->
