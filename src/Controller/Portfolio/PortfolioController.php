@@ -51,13 +51,13 @@ final class PortfolioController extends AbstractController
                     'description' => 'Passerelle pour intégrer la licence',
                 ],
                 [
-                    'periode' => 'sept 2023 - juin 2024',
+                    'periode' => 'sept 2024 - juin 2025',
                     'titre' => '1ère année BTS SIO - Option SLAM',
                     'lieu' => 'Campus Beaupeyrat, Limoges',
                     'description' => 'Services Informatiques aux Organisations',
                 ],
                 [
-                    'periode' => 'sept 2024 - Aujourd\'hui',
+                    'periode' => 'sept 2025 - Aujourd\'hui',
                     'titre' => '2eme année BTS SIO - Option SLAM',
                     'lieu' => 'Campus Beaupeyrat, Limoges',
                     'description' => '2ème année - Formation en cours',
