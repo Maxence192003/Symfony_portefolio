@@ -33,7 +33,7 @@ final class PortfolioController extends AbstractController
             // Parcours Scolaire
             'parcoursScolaire' => [
                 [
-                    'periode' => 'sept 2021 - juin 2022',
+                    'periode' => 'sept 2020 - juin 2022',
                     'titre' => 'BAC STI2D - Option SIN',
                     'lieu' => 'Lycées Georges Cabanis, Brive',
                     'description' => 'Sciences et Technologies de l\'Industrie et du Développement Durable',
