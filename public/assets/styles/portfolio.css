@@ -726,10 +726,11 @@ body {
 
 .contact-link-value {
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: var(--text);
     position: relative;
     z-index: 1;
+    overflow-wrap: anywhere;
 }
 
 /* Footer */
