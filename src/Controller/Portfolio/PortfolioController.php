@@ -324,7 +324,7 @@ final class PortfolioController extends AbstractController
                 [
                     'titre' => 'Stage 2ème Année - Le Gobelin',
                     'description' => 'Refonte et amélioration des outils numériques d\'une boutique spécialisée en jeux et jouets. Missions : retravailler le site web WordPress pour améliorer ergonomie et clarté, intégrer des plugins pertinents, gérer les droits administrateurs, optimiser des fichiers Excel en VBA, mettre en place les bonnes pratiques numériques et cybersécurité.',
-                    'tech' => ['WordPress', 'VBA', 'HTML', 'CSS', 'Cybersécurité'],
+                    'tech' => ['WordPress', 'VBA', 'Cybersécurité'],
                     'image' => '/images/legobelin.png',
                     'imageClass' => 'project-image-compact',
                     'lien' => '/assets/documents/rapport-stage-2an.pdf',
