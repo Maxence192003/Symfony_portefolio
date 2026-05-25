@@ -306,7 +306,7 @@ final class PortfolioController extends AbstractController
                 [
                     'titre' => 'Gestionnaire de Parties Warhammer',
                     'description' => 'Application mobile permettant de créer des parties de Warhammer, rentrer des scores et générer des statistiques détaillées.',
-                    'tech' => ['Symfony', 'Mobile', 'PostgreSQL', 'API REST'],
+                    'tech' => ['Flutter', 'PostgreSQL', 'API REST'],
                     'image' => '/images/project-default.jpg',
                     'lien' => null,
                 ],
