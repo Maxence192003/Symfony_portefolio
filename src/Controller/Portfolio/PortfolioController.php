@@ -94,7 +94,7 @@ final class PortfolioController extends AbstractController
                 [
                     'titre' => 'Développement Web & App',
                     'icone' => '💻',
-                    'skills' => ['HTML5', 'CSS3', 'PHP', 'Python', 'SQL', 'VBA'],
+                    'skills' => ['HTML5', 'CSS3', 'PHP','Flutter', 'Python', 'SQL', 'VBA'],
                 ],
                 [
                     'titre' => 'Frameworks & Outils',
@@ -306,7 +306,7 @@ final class PortfolioController extends AbstractController
                 [
                     'titre' => 'Gestionnaire de Parties Warhammer',
                     'description' => 'Application mobile permettant de créer des parties de Warhammer, rentrer des scores et générer des statistiques détaillées.',
-                    'tech' => ['Flutter', 'PostgreSQL', 'API REST'],
+                    'tech' => ['Flutter', 'PostgreSQL',],
                     'image' => '/images/project-default.jpg',
                     'lien' => null,
                 ],
